@@ -43,7 +43,15 @@
         //removemos a imagem do Smile
         imagem.remove();
       }
+    
+    //armazenar a imagem q aparece se o cara é ruim dms
+      let perdeu = document.getElementById("ruim");
+    //se a imagem nao for vazia (se ela existir)
+      if (perdeu != "") {
+        perdeu.remove();
+      }
     }
+  
 
     //funçao que atualiza o placar
     function atualizaPlacar(acertos, tentativas) {
@@ -54,6 +62,19 @@
 
     }
 
+    //funçao que é chamada quando o jogador erra
+    function errou(obj) {
+      //altera a classe CSS da <div> escolhida pelo jogador (className)
+      obj.className = "errou";
+      //Criar uma constante img que armazena um novo objeto imagem com largura de 100px
+      const img = new Image(100);
+      img.id = "ruim";
+      //altera o atributo src (source) da imagem criada
+      img.src = "https://i.pinimg.com/474x/72/9f/98/729f98996d9218e84ec5e4070640d86d.jpg";
+       //adiciona a imagem criada na div (obj) escolhida pelo jogador (appendChild)
+      obj.appendChild(img);
+    }
+
     //funçao executada quando o jogador acertou
     function acertou(obj) {
       //altera a classe CSS da <div> escolhida pelo jogador (className)
@@ -62,9 +83,9 @@
       const img = new Image(100);
       img.id = "imagem";
       //altera o atributo src (source) da imagem criada
-      img.src = "https://upload.wikimedia.org/wikipedia/commons/2/2e/Oxygen480-emotes-face-smile-big.svg";
+      img.src = "https://media.tenor.com/gyuqx70UjmEAAAAe/emoji-feliz-ficando-triste-emoticon-feliz-ficando-triste.png";
       //adiciona a imagem criada na div (obj) escolhida pelo jogador (appendChild)
-      obj.appendChild(img);
+      obj.appendChild(img); /*comando que cola o smile no DOM*/
     }
 
     //Função que sorteia um número aleatório entre 0 e 2 e verifica se o jogador acertou
@@ -75,8 +96,8 @@
         jogar = false;
         //incrementa as tentativas
         tentativas++;
-        //verifica se jogou 3 vezes
-        if (tentativas == 3) {
+        //verifica se jogou 4 vezes
+        if (tentativas == 4) {
           //oculta o botao joganovamente alterando a classe css (getElementById e className)
           btnJogarNovamente.className = 'invisivel';
           //mostra o botao reiniciar alterando a classe css (getElementById e className)
@@ -92,7 +113,7 @@
           acertos++;
         } else {//se errou a tentativa
           //altera a classe da <div> escolhida pelo jogador para a classe errou
-          obj.className = "errou";
+          errou(obj);
           //armazena a div aonde Smile está escondido (getElementById)
           const objSorteado = document.getElementById(sorteado);
           //chama a funçao acertou para mostrar a div aonde está o Smile
@@ -108,3 +129,11 @@
 //adiciona eventos aos botões
 btnJogarNovamente.addEventListener('click', jogarNovamente);
 btnReiniciar.addEventListener('click', reiniciar);
+
+/* tipos de igualdades js
+
+= atribuição
+== testando se o valor é igual
+=== testa se o tipo de variável é igual também, exatamente igual
+
+*/
